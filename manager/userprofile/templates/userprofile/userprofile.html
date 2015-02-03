@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block head_title %}{{owner.username}}{% endblock %}
+
+{% block content %}
+<h1>{{owner.username}}</h1>
+<p><a href="{% url 'playlist:all' owner.id %}">View Playlists</a></p>
+{% endblock %}

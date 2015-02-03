@@ -1,0 +1,4 @@
+local.py
+*.pyc
+*.sqlite3
+*.log

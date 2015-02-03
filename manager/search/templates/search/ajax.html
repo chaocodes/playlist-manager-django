@@ -1,0 +1,19 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Artist</td>
+            <td>TinySong</td>
+            <td>Fill</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for result in results %}
+    <tr>
+        <td class="song-name">{{result.SongName}}</td>
+        <td class="song-artist">{{result.ArtistName}}</td>
+        <td class="song-tinysong"><a href="{{result.Url}}">{{result.Url}}</a></td>
+        <td><button id="fill">+</button>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block head_title %}{{playlist.name}}{% endblock %}
+
+{% block content %}
+<h1>{{playlist.name}}</h1>
+<p><a href="{% url 'song:all' playlist.user.id playlist.id %}">View Songs</a></p>
+{% endblock %}

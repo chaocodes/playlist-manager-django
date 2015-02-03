@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block head_title %}Search Results{% endblock %}
+
+{% block content %}
+<h1>Search Results</h1>
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Artist</td>
+            <td>URL</td>
+            <td>Add</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for result in results %}
+    <tr>
+        <td class="song-name">{{result.SongName}}</td>
+        <td class="song-artist">{{result.ArtistName}}</td>
+        <td class="song-tinysong"><a href="{{result.Url}}">{{result.Url}}</a></td>
+        <td>
+            <div class="dropdown">
+                <button id="add-song" class="dropdown-toggle" type="button" data-toggle="dropdown">
+                    +<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="add-song">
+                    {% for playlist in playlists %}
+                    <li><a class="add-song" id="{{playlist.id}}">{{playlist.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<div id="song-added">
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% load staticfiles %}
+<script src="{% static 'js/csrf.js' %}"></script>
+<script>
+$(document).ready(function() {
+    function addSong(id, data) {
+        var csrftoken = csrf.getCookie('csrftoken');
+        $.ajax({
+            url: "/user/" + {{user.id}} + "/playlist/" + data.id + "/song/",
+            type: 'POST',
+            data: data,
+            beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            },
+            success: function(res) {
+                $('#song-added').append('\
+                <div class="alert alert-success alert-dismissible" role="alert">\
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+                    <strong>Success! </strong>' + data.name + ' - ' + data.artist + ' added to ' + data.pname + '\
+                </div>\
+                ');
+            },
+            error: function() {
+                $('#song-added').append('\
+                <div class="alert alert-danger alert-dismissible" role="alert">\
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+                    <strong>Error! </strong>' + data.name + ' - ' + data.artist + ' was <strong>not</strong> added to ' + data.pname + '\
+                </div>\
+                ');
+            },
+        });
+    }
+
+    $('.add-song').click(function(event) {
+        var id = $(this).attr('id');
+        var pname = $(this).text();
+        var row = $(this).parent().parent().parent().parent().parent();
+        var name = row.find('.song-name').text();
+        var artist = row.find('.song-artist').text();
+        var tinysong = row.find('.song-tinysong').text();
+        data = {
+            id: id,
+            name: name,
+            artist: artist,
+            tinysong: tinysong,
+            pname: pname,
+        }
+        addSong(id, data);
+    });
+});
+</script>
+{% endblock %}

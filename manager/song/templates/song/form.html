@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+{% if song_form.instance.id %}
+Edit Song
+{% else %}
+Create Song
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if song_form.instance.id %}
+<h1>Edit Song</h1>
+<form class="form" action="{% url 'song:one' playlist.user.id playlist.id song_form.instance.id %}?action=update" method="post">
+{% else %}
+<h1>Create Song</h1>
+<p>Fill in your own song information, or search for a song</p>
+<form class="form">
+    <div class="form-group">
+        <input type="text" id="search-criteria" class="form-control" placeholder="Search for any artist, song, album..." />
+    </div>
+    <button id="search">Search</button>
+    <div id="search-results">
+    </div>
+</form>
+<br />
+<form class="form" action="{% url 'song:all' playlist.user.id playlist.id %}" method="post">
+{% endif %}
+    {% csrf_token %}
+    {% include 'snippets/form.html' with form=song_form %}
+    {% if song_form.instance.id %}
+    <button type="submit">Edit</button>
+    {% else %}
+    <button type="submit">Create</button>
+    {% endif %}
+</form>
+{% endblock %}
+
+{% block scripts %}
+{% load staticfiles %}
+<script src="{% static 'js/csrf.js' %}"></script>
+<script>
+$(document).ready(function() {
+    function search(criteria) {
+        var csrftoken = csrf.getCookie('csrftoken');
+        $.ajax({
+            url: "{% url 'search:songs' %}?format=ajax",
+            type: "POST",
+            data: {
+                criteria: criteria,
+            },
+            beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            },
+            success: function(data) {
+                $('#search-results').html(data);
+            },
+            error: function() {
+                $('#search-results').html('<p>There was an error while searching</p>');
+            },
+        });
+    };
+
+    $('#search').click(function(event) {
+        event.preventDefault();
+        var criteria = $('#search-criteria').val() || ' ';
+        search(criteria);
+    });
+
+    $('#search-results').on('click', '#fill', function(event) {
+        event.preventDefault();
+        var row = $(this).parent().parent();
+        var name = row.find('.song-name').text();
+        var artist = row.find('.song-artist').text();
+        var tinysong = row.find('.song-tinysong').text();
+        $('#id_name').val(name);
+        $('#id_artist').val(artist);
+        $('#id_tinysong').val(tinysong);
+    });
+});
+</script>
+{% endblock %}

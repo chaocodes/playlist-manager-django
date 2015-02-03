@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block head_title %}Edit UserProfile{% endblock %}
+
+{% block content %}
+<h1>Edit User</h1>
+<form class="form" action="{% url 'userprofile:one' user_form.instance.id %}?action=update" method="post">
+    {% csrf_token %}
+    {% include 'snippets/form.html' with form=user_form %}
+    {% include 'snippets/form.html' with form=userprofile_form %}
+    <button type="submit">Edit</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+{% load staticfiles %}
+<script src="{% static 'js/csrf.js' %}"></script>
+<script>
+$(document).ready(function() {
+    function search(criteria) {
+        var csrftoken = csrf.getCookie('csrftoken');
+        $.ajax({
+            url: "{% url 'search:songs' %}?format=ajax",
+            type: "POST",
+            data: {
+                criteria: criteria,
+            },
+            beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            },
+            success: function(data) {
+                $('#search-results').html(data);
+            },
+            error: function() {
+                $('#search-results').html('<p>There was an error while searching</p>');
+            },
+        });
+    };
+
+    $('#search').click(function(event) {
+        event.preventDefault();
+        var criteria = $('#search-criteria').val() || ' ';
+        search(criteria);
+    });
+
+    $('#search-results').on('click', '#fill', function(event) {
+        event.preventDefault();
+        var row = $(this).parent().parent();
+        var name = row.find('.song-name').text();
+        var artist = row.find('.song-artist').text();
+        var tinysong = row.find('.song-tinysong').text();
+        $('#id_name').val(name);
+        $('#id_artist').val(artist);
+        $('#id_tinysong').val(tinysong);
+    });
+});
+</script>
+{% endblock %}

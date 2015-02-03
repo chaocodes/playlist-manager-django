@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+{% if playlist_form.instance.id %}
+Edit Playlist
+{% else %}
+Create Playlist
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if playlist_form.instance.id %}
+<h1>Edit Playlist</h1>
+<form class="form" action="{% url 'playlist:one' playlist_form.instance.user.id playlist_form.instance.id %}?action=update" method="post">
+{% else %}
+<h1>Create Playlist</h1>
+<form class="form" action="{% url 'playlist:all' user.id %}" method="post">
+{% endif %}
+    {% csrf_token %}
+    {% include 'snippets/form.html' with form=playlist_form %}
+    {% if playlist_form.instance.id %}
+    <button type="submit">Edit</button>
+    {% else %}
+    <button type="submit">Create</button>
+    {% endif %}
+</form>
+{% endblock %}

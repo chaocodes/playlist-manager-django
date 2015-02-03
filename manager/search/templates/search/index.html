@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block head_title %}Search{% endblock %}
+
+{% block content %}
+<form class="form" action="{% url 'search:songs' %}" method="post">
+    {% csrf_token %}
+    {% include 'snippets/form.html' with form=search_form %}
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

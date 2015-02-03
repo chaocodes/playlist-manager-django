@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block head_title %}{{song.name}} - {{song.artist}}{% endblock %}
+
+{% block content %}
+<h1>{{song.name}} - {{song.artist}}</h1>
+<p><a href="{{song.tinysong}}">Listen to Song</a></p>
+{% endblock %}
