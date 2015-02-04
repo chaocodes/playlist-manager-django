@@ -26,6 +26,9 @@
         <tr>
             <th>Name</th>
             <th>Songs</th>
+            {% if not owner %}
+            <th>Creator</th>
+            {% endif %}
             <th>Created</th>
             <th>Updated</th>
             {% if user.is_authenticated and user.id == owner.id %}
@@ -38,6 +41,9 @@
     <tr>
         <td><a href="{% url 'song:all' playlist.user.id playlist.id %}">{{playlist.name}}</a></td>
         <td>{{playlist.song_count}}</td>
+        {% if not owner %}
+        <td><a href="{% url 'playlist:all' playlist.user.id %}">{{playlist.user.username}}</a></td>
+        {% endif %}
         <td>{{playlist.created_at}}</td>
         <td>{{playlist.updated_at}}</td>
         {% if user.is_authenticated and user.id == owner.id %}
