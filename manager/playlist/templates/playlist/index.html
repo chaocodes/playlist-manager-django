@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block head_title %}{{owner.username}}'s Playlists{% endblock %}
+{% block head_title %}{{owner.get_username}}'s Playlists{% endblock %}
 
 {% block content %}
 <h1>
@@ -9,7 +9,7 @@
         {% if user.id == owner.id %}
         Your
         {% else %}
-        {{owner.username}}'s
+        {{owner.get_username}}'s
         {% endif %}
     {% endif %}
     Playlists

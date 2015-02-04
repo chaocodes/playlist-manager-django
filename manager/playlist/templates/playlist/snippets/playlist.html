@@ -19,7 +19,7 @@
         <td><a href="{% url 'song:all' playlist.user.id playlist.id %}">{{playlist.name}}</a></td>
         <td>{{playlist.song_count}}</td>
         {% if not owner %}
-        <td><a href="{% url 'playlist:all' playlist.user.id %}">{{playlist.user.username}}</a></td>
+        <td><a href="{% url 'playlist:all' playlist.user.id %}">{{playlist.user.get_username}}</a></td>
         {% endif %}
         <td>{{playlist.created_at}}</td>
         <td>{{playlist.updated_at}}</td>
