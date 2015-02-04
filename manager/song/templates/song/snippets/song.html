@@ -1,0 +1,37 @@
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>Song</th>
+            {% if not playlist %}
+            <th>Playlist</th>
+            {% endif %}
+            <th>Added</th>
+            {% if owner and user.is_authenticated and user.id == owner.id %}
+            <th>Edit</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for song in songs %}
+    <tr>
+        <td><a href="{{song.tinysong}}">{{song.name}} - {{song.artist}}</a></td>
+        {% if not playlist %}
+        <td><a href="{% url 'song:all' song.playlist.user.id song.playlist.id %}">{{song.playlist.name}}</a></td>
+        {% endif %}
+        <td>{{song.created_at}}</td>
+        {% if owner and user.is_authenticated and user.id == owner.id %}
+        <td>
+            <div class="pull-left">
+                <form class="form-inline" action="{% url 'song:edit' user.id playlist.id song.id %}">
+                    <button type="submit">Edit</button>
+                </form>
+            </div>
+            <form class="form-inline" action="{% url 'song:one' user.id playlist.id song.id %}?action=delete" method="post">
+                {% csrf_token %}
+                <button type="submit" onclick="return (confirm('Are you sure you want to delete?'));">Delete</button>
+            </form>
+        </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>

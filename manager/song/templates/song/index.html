@@ -1,50 +1,24 @@
 {% extends "base.html" %}
 
-{% block head_title %}{{playlist.name}} Songs{% endblock %}
+{% block head_title %}{% if playlist %}{{playlist.name}} {% endif %}Songs{% endblock %}
 
 {% block content %}
 <h1>
     <div class="pull-left">
-        {{playlist.name}} Songs ({{playlist.song_count}})
+        {% if playlist %}
+        {{playlist.name}}
+        {% endif %}
+        Songs
+        {% if playlist %}
+        ({{playlist.song_count}})
+        {% endif %}
     </div>
-    {% if user.is_authenticated and user.id == owner.id %}
+    {% if owner and user.is_authenticated and user.id == owner.id %}
     <form class="form-inline" action="{% url 'song:create' owner.id playlist.id %}">
         <button type="submit">+</button>
     </form>
     {% endif %}
     <div class="clearfix"></div>
 </h1>
-<table class="table table-hover table-bordered">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Artist</th>
-            <th>Added</th>
-            {% if user.is_authenticated and user.id == owner.id %}
-            <th>Edit</th>
-            {% endif %}
-        </tr>
-    </thead>
-    <tbody>
-    {% for song in songs %}
-    <tr>
-        <td><a href="{{song.tinysong}}">{{song.name}}</a></td>
-        <td>{{song.artist}}</td>
-        <td>{{song.created_at}}</td>
-        {% if user.is_authenticated and user.id == owner.id %}
-        <td>
-            <div class="pull-left">
-                <form class="form-inline" action="{% url 'song:edit' user.id playlist.id song.id %}">
-                    <button type="submit">Edit</button>
-                </form>
-            </div>
-            <form class="form-inline" action="{% url 'song:one' user.id playlist.id song.id %}?action=delete" method="post">
-                {% csrf_token %}
-                <button type="submit" onclick="return (confirm('Are you sure you want to delete?'));">Delete</button>
-            </form>
-        </td>
-        {% endif %}
-    </tr>
-    {% endfor %}
-</table>
+{% include 'song/snippets/song.html' %}
 {% endblock %}
