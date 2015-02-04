@@ -27,12 +27,12 @@
         <td>
             <div class="pull-left">
                 <form class="form-inline" action="{% url 'playlist:edit' user.id playlist.id %}">
-                    <button type="submit">Edit</button>
+                    <button class="btn btn-default" ="submit">Edit</button>
                 </form>
             </div>
             <form class="form-inline" action="{% url 'playlist:one' user.id playlist.id %}?action=delete" method="post">
                 {% csrf_token %}
-                <button type="submit" onclick="return (confirm('Are you sure you want to delete?'));">Delete</button>
+                <button class="btn btn-default" type="submit" onclick="return (confirm('Are you sure you want to delete?'));">Delete</button>
             </form>
         </td>
         {% endif %}
