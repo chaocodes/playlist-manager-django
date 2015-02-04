@@ -21,6 +21,9 @@
     </tr>
     {% endfor %}
 </table>
+<form action="{% url 'core:song' %}">
+    <button class="btn btn-default" type="submit">View More Songs >></button>
+</form>
 <h1>Latest Created Playlists</h1>
 <table class="table table-hover table-bordered">
     <thead>
@@ -43,4 +46,7 @@
     </tr>
     {% endfor %}
 </table>
+<form action="{% url 'core:playlist' %}">
+    <button class="btn btn-default" type="submit">View More Playlists >></button>
+</form>
 {% endblock %}
