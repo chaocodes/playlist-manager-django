@@ -20,48 +20,12 @@
 </div>
 <div class="container">
     <h1>Latest Added Songs</h1>
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>Song</th>
-                <th>Playlist</th>
-                <th>Added</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for song in songs %}
-        <tr>
-            <td><a href="{{song.tinysong}}">{{song.name}} - {{song.artist}}</a></td>
-            <td><a href="{% url 'song:all' song.playlist.user.id song.playlist.id %}">{{song.playlist.name}}</a></td>
-            <td>{{song.created_at}}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    {% include 'song/snippets/song.html' %}
     <form action="{% url 'core:song' %}">
         <button class="btn btn-default" type="submit">View More Songs >></button>
     </form>
     <h1>Latest Created Playlists</h1>
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Songs</th>
-                <th>Creator</th>
-                <th>Created</th>
-                <th>Updated</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for playlist in playlists %}
-        <tr>
-            <td><a href="{% url 'song:all' playlist.user.id playlist.id %}">{{playlist.name}}</a></td>
-            <td>{{playlist.song_count}}</td>
-            <td><a href="{% url 'playlist:all' playlist.user.id %}">{{playlist.user.username}}</a></td>
-            <td>{{playlist.created_at}}</td>
-            <td>{{playlist.updated_at}}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    {% include 'playlist/snippets/playlist.html' %}
     <form action="{% url 'core:playlist' %}">
         <button class="btn btn-default" type="submit">View More Playlists >></button>
     </form>
