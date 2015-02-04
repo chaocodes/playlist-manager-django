@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
     </head>
     <body>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapsible">
@@ -81,6 +81,16 @@
         {% block content %}
         {% endblock %}
         </div>
+        {% endblock %}
+        {% block footer %}
+        <footer>
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <p class="navbar-text pull-left">Created by Chao Lai &#169; 2015</p>
+                    <p class="navbar-text pull-right"><a href="http://chaocodes.com/">chaocodes.com</a></p>
+                </div>
+            </nav>
+        </footer>
         {% endblock %}
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
