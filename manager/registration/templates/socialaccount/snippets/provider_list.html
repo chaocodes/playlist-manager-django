@@ -1,0 +1,20 @@
+{% load socialaccount %}
+
+{% for provider in socialaccount.providers %}
+{% if provider.id == "openid" %}
+{% for brand in provider.get_brands %}
+<div class="pull-left">
+    <form class="form-inline" action="{% provider_login_url provider.id openid=brand.openid_url process=process %}">
+        <button class="btn btn-default btn-lg" type="submit">{{brand.name}}</button>
+    </form>
+</div>
+{% endfor %}
+{% endif %}
+<div class="pull-left">
+    <form class="form-inline" action="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+        <button class="btn btn-default btn-lg" type="submit">{{provider.name}}</button>
+    </form>
+</div>
+{% endfor %}
+<div class="clearfix"></div>
+<br>

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load bootstrap3 %}
+
 {% block head_title %}{{owner.get_username}}'s Playlists{% endblock %}
 
 {% block content %}
@@ -16,7 +18,7 @@
     </div>
     {% if user.is_authenticated %}
     <form class="form-inline" action="{% url 'playlist:create' user.id %}">
-        <button type="submit">+</button>
+        <button class="btn btn-default" type="submit">{% bootstrap_icon 'plus' %} Create</button>
     </form>
     {% endif %}
     <div class="clearfix"></div>

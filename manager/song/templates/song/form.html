@@ -19,7 +19,7 @@ Create Song
     <div class="form-group">
         <input type="text" id="search-criteria" class="form-control" placeholder="Search for any artist, song, album..." />
     </div>
-    <button id="search">Search</button>
+    <button id="search" class="btn btn-default">Search</button>
     <div id="search-results">
     </div>
 </form>
@@ -29,9 +29,9 @@ Create Song
     {% csrf_token %}
     {% include 'snippets/form.html' with form=song_form %}
     {% if song_form.instance.id %}
-    <button type="submit">Edit</button>
+    <button class="btn btn-default" type="submit">Edit</button>
     {% else %}
-    <button type="submit">Create</button>
+    <button class="btn btn-default" type="submit">Create</button>
     {% endif %}
 </form>
 {% endblock %}

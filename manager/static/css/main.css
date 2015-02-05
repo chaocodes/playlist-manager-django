@@ -20,6 +20,10 @@ body {
     width: 100%;
 }
 
+.table-edit {
+    width: 15%;
+}
+
 footer {
     position: absolute;
     bottom: 0;
