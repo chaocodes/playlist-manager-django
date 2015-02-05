@@ -11,6 +11,6 @@
 <form id="openid_login_form" class="openid_login" method="post" action="{% url 'openid_login' %}">
     {% csrf_token %}
     {% include 'snippets/form.html' %}
-    <button type="submit">Sign In</button>
+    <button class="btn btn-default" type="submit">Sign In</button>
 </form>
 {% endblock %}
