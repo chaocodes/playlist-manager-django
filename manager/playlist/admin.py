@@ -10,5 +10,6 @@ class SongInline(admin.StackedInline):
 
 class PlaylistAdmin(admin.ModelAdmin):
     inlines = [SongInline]
+    list_display = ['name', 'user', 'created_at', 'updated_at']
 
 admin.site.register(Playlist, PlaylistAdmin)
