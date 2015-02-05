@@ -27,7 +27,7 @@
                     <div class="navbar-form navbar-right btn-group">
                         {% if user.is_authenticated %}
                         <div class="dropdown-user">
-                            <button id="user-links" class="dropdown-toggle btn btn-default" type="button" data-toggle="dropdown" type="button">{{user.get_username}}<span class="caret"></span></button>
+                            <button id="user-links" class="dropdown-toggle btn btn-default" type="button" data-toggle="dropdown" type="button">{% bootstrap_icon 'user' %} {{user.get_username}}<span class="caret"></span></button>
                             <ul class="dropdown-menu" aria-labelledby="user-links">
                                 {% if user.is_staff %}
                                 <li><a href="{% url 'admin:index' %}">Admin</a></li>

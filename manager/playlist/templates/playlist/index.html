@@ -18,7 +18,7 @@
     </div>
     {% if user.is_authenticated %}
     <form class="form-inline" action="{% url 'playlist:create' user.id %}">
-        <button class="btn btn-default" type="submit">{% bootstrap_icon 'plus' %}</button>
+        <button class="btn btn-default" type="submit">{% bootstrap_icon 'plus' %} Create</button>
     </form>
     {% endif %}
     <div class="clearfix"></div>
