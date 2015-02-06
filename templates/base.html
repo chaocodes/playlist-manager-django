@@ -10,6 +10,29 @@
         {% bootstrap_css %}
         {% load staticfiles %}
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        {% bootstrap_javascript jquery=1 %}
+        <script type="text/javascript" src="{% static 'js/jquery.tablesorter.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.tablesorter.widgets.min.js' %}"></script>
+        <script>
+        $(function() {
+            $.tablesorter.themes.bootstrap = {
+                table      : 'table table-bordered table-hover',
+                caption    : '',
+                header     : 'bootstrap-header',
+                footerRow  : '',
+                footerCells: '',
+                icons      : '',
+                sortNone   : 'bootstrap-icon-unsorted',
+                sortAsc    : 'icon-chevron-up glyphicon glyphicon-chevron-up',
+                sortDesc   : 'icon-chevron-down glyphicon glyphicon-chevron-down',
+                active     : '',
+                hover      : '',
+                filterRow  : '',
+                even       : '',
+                odd        : '',
+            };
+        });
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -92,7 +115,6 @@
             </nav>
         </footer>
         {% endblock %}
-        {% bootstrap_javascript jquery=1 %}
         {% block scripts %}
         {% endblock %}
     </body>

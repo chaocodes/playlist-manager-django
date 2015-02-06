@@ -1,5 +1,5 @@
 {% load bootstrap3 %}
-<table class="table table-hover table-bordered">
+<table id="playlist-table-sortable" class="table table-hover table-bordered">
     <thead>
         <tr>
             <th>Name</th>
@@ -40,3 +40,14 @@
     </tr>
     {% endfor %}
 </table>
+<script>
+$(document).ready(function()
+{
+    $("#playlist-table-sortable").tablesorter({
+        theme: 'bootstrap',
+        widthFixed: true,
+        headerTemplate: '{content} {icon}',
+        widgets: ['uitheme'],
+    });
+});
+</script>
