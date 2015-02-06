@@ -6,7 +6,7 @@ Installation
 ---
 1. Install required dependencies (in vritualenv) `pip install -r requirements.txt`
 2. Run `python manage.py migrate` to migrate all models
-3. Create local.py in the root directory of the project with the following settings
+3. Create local.py in the 'manager' directory of the project with the following settings
 
 ``` python
 import os
