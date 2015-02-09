@@ -112,9 +112,7 @@ class PlaylistTest(TestCase):
         self.assertEquals(response.status_code, 404)
 
     def remove_playlist(self, name):
-        playlist = Playlist.objects.filter(name=name)
-        if playlist.exists():
-            playlist.delete()
+        playlist = Playlist.objects.filter(name=name).delete()
         return None
 
     # Playlist Post Routes
