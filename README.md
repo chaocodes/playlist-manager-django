@@ -39,3 +39,8 @@ Setup
 2. Add your website to the SITES admin category
 3. Add openid credentials to Social Account Apps to enable this form of authentication
 4. Full list of post-installation instructions and authentication settings go  [here](http://django-allauth.readthedocs.org/en/latest/installation.html)
+
+Testing
+---
+1. Run tests with `coverage run manage.py test` along with any other testing parameters you want
+2. `coverage report` and `coverage html` to generate coverage reports
