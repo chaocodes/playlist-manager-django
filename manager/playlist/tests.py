@@ -21,10 +21,6 @@ class PlaylistTest(TestCase):
         playlist = Playlist.objects.get(name='Rock and Roll')
         self.assertEqual(playlist.song_count(), 10)
 
-    def test_playlist_unicode(self):
-        playlist = Playlist.objects.get(name='Rock and Roll')
-        self.assertEqual(playlist.__unicode__(), u'%s - %s' % (playlist.user, playlist.name))
-
     # Route Helpers
 
     def authorize(self, auth, wrong_user=False):
