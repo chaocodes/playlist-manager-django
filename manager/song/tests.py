@@ -171,7 +171,7 @@ class SongTest(DBTestCase):
         self.assertEqual(response.status_code, 302)
         self.assertFalse(song.exists())
 
-    def test_delete_playlist_noauth(self):
+    def test_delete_song_noauth(self):
         response = self.delete_song(False)
         song = Song.objects.filter(name='Delete This')
         self.assertEqual(response.status_code, 403)
