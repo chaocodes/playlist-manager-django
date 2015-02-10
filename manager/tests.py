@@ -3,12 +3,14 @@ from django.test import Client, TestCase
 
 from manager.playlist.models import Playlist
 from manager.song.models import Song
+from manager.userprofile.models import UserProfile
 
 class DBTestCase(TestCase):
     def setUp(self):
         self.client = Client()
         user = User.objects.create_user('test', password='test')
         user2 = User.objects.create_user('test2', password='test')
+        userprofile = UserProfile.objects.create(user=user)
         playlist = Playlist.objects.create(name='Rock and Roll', user=user)
         for i in range(0, 10):
             Song.objects.create(name='Rock', artist='n Roll', playlist=playlist)
