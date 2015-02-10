@@ -1,25 +1,14 @@
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.test import Client, TestCase
+from django.test import Client
+
+from manager.tests import DBTestCase
 
 from manager.song.models import Song
 
 from .models import Playlist
 
-class PlaylistTest(TestCase):
-    def setUp(self):
-        self.client = Client()
-        user = User.objects.create_user('test', password='test')
-        user2 = User.objects.create_user('test2', password='test')
-        playlist = Playlist.objects.create(name='Rock and Roll', user=user)
-        for i in range(0, 10):
-            Song.objects.create(name='Rock', artist='n Roll', playlist=playlist)
-
-    def tearDown(self):
-        Song.objects.all().delete()
-        Playlist.objects.all().delete()
-        User.objects.all().delete()
-
+class PlaylistTest(DBTestCase):
     # Playlist Functions
 
     def test_playlist_song_count(self):
@@ -27,16 +16,6 @@ class PlaylistTest(TestCase):
         self.assertEqual(playlist.song_count(), 10)
 
     # Route Helpers
-
-    def authorize(self, auth, wrong_user=False):
-        if auth:
-            if wrong_user:
-                self.client.login(username='test2', password='test')
-            else:
-                self.client.login(username='test', password='test')
-        else:
-            self.client.logout()
-        return None
 
     def uri_playlist_all(self, user_id):
         return reverse('playlist:all', args=[user_id])
