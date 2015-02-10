@@ -15,6 +15,11 @@ class PlaylistTest(TestCase):
         for i in range(0, 10):
             Song.objects.create(name='Rock', artist='n Roll', playlist=playlist)
 
+    def tearDown(self):
+        Song.objects.all().delete()
+        Playlist.objects.all().delete()
+        User.objects.all().delete()
+
     # Playlist Functions
 
     def test_playlist_song_count(self):
