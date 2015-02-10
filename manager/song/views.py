@@ -69,8 +69,6 @@ def song(request, user_id, playlist_id, song_id):
                 song.delete()
                 return redirect('song:all', user_id, playlist_id)
             elif action == 'update':
-                if request.user != playlist.user:
-                    return HttpResponseForbidden()
                 form = SongForm(request.POST, instance=song)
                 if form.is_valid():
                     song = form.save()
