@@ -107,7 +107,6 @@ class PlaylistTest(DBTestCase):
 
     def create_playlist(self, data, auth):
         user = User.objects.get(username='test')
-        data = data
         self.remove_playlist('Playlist')
         self.authorize(auth)
         response = self.client.post(self.uri_playlist_all(user.id), data)
@@ -136,7 +135,6 @@ class PlaylistTest(DBTestCase):
         user = User.objects.get(username='test')
         self.remove_playlist('Modify This')
         playlist = Playlist.objects.create(name='Modify This', user=user)
-        data = data
         self.remove_playlist('Playlist')
         self.authorize(auth)
         response = self.client.post('%s?action=update' % (self.uri_playlist_one(playlist.user.id, playlist.id)), data)
