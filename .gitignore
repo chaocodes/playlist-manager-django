@@ -2,3 +2,5 @@ local.py
 *.pyc
 *.sqlite3
 *.log
+.coverage
+htmlcov/
