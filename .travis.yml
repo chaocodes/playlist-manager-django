@@ -6,3 +6,7 @@ install:
 script:
 - coverage run manage.py test
 - coverage report --fail-under=100
+notifications:
+    email:
+        on_success: change
+        on_failure: always
