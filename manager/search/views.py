@@ -50,8 +50,6 @@ def search(request):
             return render(request, 'search/index.html', data)
         format = request.GET.get('format', False)
         if format:
-            if format == 'json':
-                return JsonResponse(data)
-            elif format == 'ajax':
+            if format == 'ajax':
                 return render(request, 'search/ajax.html', data)
         return render(request, 'search/results.html', data)
