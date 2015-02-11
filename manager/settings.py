@@ -81,6 +81,10 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
+BOOTSTRAP3 = {
+    'jquery_url': '//code.jquery.com/jquery-1.9.1.min.js',
+}
+
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
 
 MESSAGE_TAGS = {
