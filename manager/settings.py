@@ -1,5 +1,20 @@
+from django.contrib import messages
 import os
-from local import *
+try:
+    from local import *
+except ImportError:
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    SECRET_KEY = 'SECRET_KEY'
+    DEBUG = True
+    ADMINS = (
+        ('Name', 'name@gmail.com'),
+    )
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 TEMPLATE_DEBUG = DEBUG
 MANAGERS = ADMINS
@@ -17,6 +32,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 INSTALLED_APPS = (
+    'bootstrap3',
+    'django_admin_bootstrapped',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,6 +94,18 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
+
+BOOTSTRAP3 = {
+    'jquery_url': '//code.jquery.com/jquery-1.9.1.min.js',
+}
+
+DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
+
+MESSAGE_TAGS = {
+    messages.SUCCESS: 'alert-success success',
+    messages.WARNING: 'alert-warning warning',
+    messages.ERROR: 'alert-danger error'
+}
 
 LOGGING = {
     'version': 1,

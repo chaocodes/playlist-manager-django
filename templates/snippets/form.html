@@ -1,11 +1,2 @@
-{% load bootstrap %}
-{% for field in form.visible_fields %}
-    <div class="form-group">
-        {{ field.errors }}
-        {{ field.label_tag }}
-        {{ field|bootstrap_field }}
-    </div>
-{% endfor %}
-{% for field in form.hidden_fields %}
-{{field}}
-{% endfor %}
+{% load bootstrap3 %}
+{% bootstrap_form form %}

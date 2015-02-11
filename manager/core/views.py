@@ -15,3 +15,9 @@ def playlist(request):
         'playlists': Playlist.objects.order_by('-created_at'),
     }
     return render(request, 'playlist/index.html', data)
+
+def song(request):
+    data = {
+        'songs': Song.objects.order_by('-created_at'),
+    }
+    return render(request, 'song/index.html', data)
