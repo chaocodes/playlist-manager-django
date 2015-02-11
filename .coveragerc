@@ -20,5 +20,6 @@ exclude_lines =
 
 omit =
     manager/*/migrations/*
+    manager/wsgi.py
 
 show_missing = True
