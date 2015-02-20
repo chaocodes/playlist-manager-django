@@ -1,4 +1,4 @@
-Playlist Manager
+Playlist Manager [![Build Status](https://travis-ci.org/chaocodes/playlist-manager-django.svg)](https://travis-ci.org/chaocodes/playlist-manager-django)
 ===
 Playlist Manager is a web app that allows users to create/manage playlists of songs. The Search functionality is powered by TinySong API for now.
 
